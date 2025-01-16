@@ -8,7 +8,6 @@ const knex = initKnex(configuration);
 const SALT_ROUNDS = 8;
 
 const fetchUser = async (req, res) => {
-
   try {
     const user = await knex("users").where({ id: req.token.id }).first();
 
@@ -50,4 +49,37 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { fetchUser, registerUser };
+const loginUser = async (req, res) => {
+  if (!req.body.email || !req.body.password) {
+    return res
+      .status(400)
+      .json({ msg: "You must provide an email and password" });
+  }
+
+  try {
+    const user = await knex("users").where({ email: req.body.email }).first();
+
+    const result = await bcrypt.compare(req.body.password, user.password);
+
+    if (!result) {
+      return res
+        .status(403)
+        .json({ message: "Username/Password combination is incorrect" });
+    }
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        sub: user.email,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "8h" }
+    );
+
+    res.json({ authToken: token });
+  } catch (error) {
+    res.status(404).json({ message: "User not found" });
+  }
+};
+
+export { fetchUser, registerUser, loginUser };
