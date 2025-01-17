@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 const knex = initKnex(configuration);
 const SALT_ROUNDS = 8;
 
-const fetchUser = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     const user = await knex("users").where({ id: req.token.id }).first();
 
@@ -82,4 +82,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { fetchUser, registerUser, loginUser };
+export { getUser, registerUser, loginUser };
