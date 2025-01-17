@@ -1,106 +1,140 @@
 /**
  * @param { import("knex").Knex } knex
- * @returns { Promise<void> } 
+ * @returns { Promise<void> }
  */
-exports.seed = async function(knex) {
-  
-  await knex('habits').del()
-  await knex('habits').insert([
+exports.seed = async function (knex) {
+  await knex("habits").del();
+  await knex("habits").insert([
     {
       id: 1,
       user_id: 1,
-      title: "Morning Workout",
+      title: "Drink 8 glasses of water",
       frequency: "daily",
-      streak_count: 3,
-      completion_history: JSON.stringify(["2024-12-18", "2024-12-19", "2024-12-20"])
+      streak_count: 5,
+      completion_history: JSON.stringify([
+        "2025-01-18",
+        "2025-01-19",
+        "2025-01-20",
+        "2025-01-21",
+        "2025-01-22",
+      ]),
+      completed: true,
+      created_at: new Date(),
+      updated_at: new Date(),
     },
     {
       id: 2,
       user_id: 1,
-      title: "Drink Water",
+      title: "Morning meditation",
       frequency: "daily",
-      streak_count: 10,
-      completion_history: JSON.stringify(["2024-12-11", "2024-12-12", "2024-12-13", "2024-12-14", "2024-12-15", "2024-12-16", "2024-12-17", "2024-12-18", "2024-12-19", "2024-12-20"])
+      streak_count: 7,
+      completion_history: JSON.stringify([
+        "2025-01-16",
+        "2025-01-17",
+        "2025-01-18",
+        "2025-01-19",
+        "2025-01-20",
+        "2025-01-21",
+        "2025-01-22",
+      ]),
+      completed: false,
+      created_at: new Date(),
+      updated_at: new Date(),
     },
     {
       id: 3,
       user_id: 1,
-      title: "Write a Journal",
-      frequency: "weekly",
-      streak_count: 2,
-      completion_history: JSON.stringify(["2024-12-10", "2024-12-17"])
+      title: "Write in journal",
+      frequency: "daily",
+      streak_count: 0,
+      completion_history: JSON.stringify([
+      ]),
+      completed: false,
+      created_at: new Date(),
+      updated_at: new Date(),
     },
     {
       id: 4,
       user_id: 2,
-      title: "Read a Book",
+      title: "Stretch for 10 minutes",
       frequency: "daily",
-      streak_count: 7,
-      completion_history: JSON.stringify(["2024-12-14", "2024-12-15", "2024-12-16", "2024-12-17", "2024-12-18", "2024-12-19", "2024-12-20"])
+      streak_count: 10,
+      completion_history: JSON.stringify([
+        "2025-01-13",
+        "2025-01-14",
+        "2025-01-15",
+        "2025-01-16",
+        "2025-01-17",
+        "2025-01-18",
+      ]),
+      completed: true,
+      created_at: new Date(),
+      updated_at: new Date(),
     },
+
     {
       id: 5,
       user_id: 2,
-      title: "Stretching",
+      title: "Read 10 pages of a book",
       frequency: "daily",
-      streak_count: 5,
-      completion_history: JSON.stringify(["2024-12-16", "2024-12-17", "2024-12-18", "2024-12-19", "2024-12-20"])
+      streak_count: 8,
+      completion_history: JSON.stringify([
+        "2025-01-15",
+        "2025-01-16",
+        "2025-01-17",
+        "2025-01-18",
+        "2025-01-19",
+        "2025-01-20",
+        "2025-01-21",
+        "2025-01-22",
+      ]),
+      completed: true,
+      created_at: new Date(),
+      updated_at: new Date(),
     },
     {
       id: 6,
       user_id: 2,
-      title: "Cook a Meal",
-      frequency: "weekly",
-      streak_count: 1,
-      completion_history: JSON.stringify(["2024-12-14"])
+      title: "Work out for 30 minutes",
+      frequency: "daily",
+      streak_count: 2,
+      completion_history: JSON.stringify(["2025-01-21", "2025-01-22"]),
+      completed: true,
+      created_at: new Date(),
+      updated_at: new Date(),
     },
+  
     {
       id: 7,
       user_id: 3,
-      title: "Meditate",
+      title: "Limit social media to 1 hour",
       frequency: "daily",
-      streak_count: 1,
-      completion_history: JSON.stringify(["2024-12-20"])
+      streak_count: 4,
+      completion_history: JSON.stringify([
+        "2025-01-19",
+        "2025-01-20",
+        "2025-01-21",
+        "2025-01-22",
+      ]),
+      completed: false,
+      created_at: new Date(),
+      updated_at: new Date(),
     },
+
     {
       id: 8,
       user_id: 3,
-      title: "Evening Walk",
+      title: "Plan tomorrow's tasks",
       frequency: "daily",
-      streak_count: 4,
-      completion_history: JSON.stringify(["2024-12-17", "2024-12-18", "2024-12-19", "2024-12-20"])
-    },
-    {
-      id: 9,
-      user_id: 3,
-      title: "Learn a Skill",
-      frequency: "weekly",
       streak_count: 3,
-      completion_history: JSON.stringify(["2024-12-06", "2024-12-13", "2024-12-20"])
-    },
-    {
-      id: 10,
-      user_id: 4,
-      title: "Water Plants",
-      frequency: "weekly",
-      streak_count: 2,
-      completion_history: JSON.stringify(["2024-12-10", "2024-12-17"])
-    },
-    {
-      id: 11,
-      user_id: 4,
-      title: "Go for a run",
-      frequency: "weekly",
-      streak_count: 1,
-      completion_history: JSON.stringify(["2024-12-18"])
-    },
-    {
-      id: 12,
-      user_id: 4,
-      title: "Yoga Practice",
-      frequency: "daily",
-      streak_count: 2,
-      completion_history: JSON.stringify(["2024-12-19", "2024-12-20"])
+      completion_history: JSON.stringify([
+        "2025-01-20",
+        "2025-01-21",
+        "2025-01-22",
+      ]),
+      completed: false,
+      created_at: new Date(),
+      updated_at: new Date(),
     },
   ]);
 };

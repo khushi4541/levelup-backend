@@ -14,7 +14,8 @@ exports.up = async function (knex) {
       .onDelete("CASCADE"); // User ID foreign key
     table.string("title").notNullable(); // Habit title
     table.string("frequency").notNullable(); // Frequency (e.g., daily, weekly)
-    table.integer("streak_count").defaultTo(0); // Streak count
+    table.integer("streak_count").defaultTo(0);
+    table.boolean("completed").defaultTo(false); 
     table.json("completion_history"); // Array of completed dates
     table.timestamps(true, true); // Created and updated timestamps
   });
