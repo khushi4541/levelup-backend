@@ -1,10 +1,10 @@
 import express from "express";
 import * as usersController from "../controllers/users-controller.js";
-import authorise from "../middleware/auth.js";
+import authorize from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.get("/", authorise, usersController.fetchUser);
+router.get("/profile", authorize, usersController.fetchUser);
 
 router.post("/register", usersController.registerUser);
 
