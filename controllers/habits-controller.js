@@ -55,7 +55,6 @@ const completeHabits = async (req, res) => {
       });
 
     res.status(200).json({
-      message: "Habit completion status and streak updated",
       habit: {
         id: habit.id,
         completed,
@@ -69,4 +68,53 @@ const completeHabits = async (req, res) => {
   }
 };
 
-export { getHabits, completeHabits };
+const postHabit = async (req, res) => {
+  const { title, frequency } = req.body;
+
+  const userId = req.token.id;
+
+  if (!title || !frequency) {
+    return res
+      .status(400)
+      .json({ msg: "You must provide all required information" });
+  }
+
+  try {
+    const newHabitId = await knex("habits").insert({
+      user_id: userId,
+      title,
+      frequency,
+      streak_count: 0,
+      completion_history: JSON.stringify([]),
+      created_at: new Date(),
+      updated_at: new Date(),
+    });
+
+    const newHabit = await knex("habits").where({ id: newHabitId[0] }).first();
+    res.status(201).json(newHabit);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: `Couldn't create new habit: ${error.message}` });
+  }
+};
+
+const deleteHabit = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const rowsDeleted = await knex("habits").where({ id }).delete();
+
+    if (rowsDeleted === 0) {
+      return res.status(404).json({ message: `Habit not found` });
+    }
+
+    res.status(200).json("Habit deleted successfully");
+  } catch (error) {
+    res.status(500).json({
+      message: `Unable to delete habit: ${error}`,
+    });
+  }
+};
+
+export { getHabits, completeHabits, postHabit, deleteHabit };
