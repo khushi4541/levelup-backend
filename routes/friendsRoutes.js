@@ -4,8 +4,11 @@ import * as friendsController from "../controllers/friends-controller.js"
 
 const router = express.Router();
 
-router.route("/request")
+router.get("/requests", authorize, friendsController.getFriendRequests)
 
-    .get(authorize, friendsController.getFriendRequests)
+router.route("/request/:id")
+    .patch(authorize, friendsController.acceptFriendRequest)
+
+    .delete(authorize)
 
 export default router;
