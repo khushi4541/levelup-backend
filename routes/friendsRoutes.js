@@ -9,6 +9,6 @@ router.get("/requests", authorize, friendsController.getFriendRequests)
 router.route("/request/:id")
     .patch(authorize, friendsController.acceptFriendRequest)
 
-    .delete(authorize)
+    .delete(authorize, friendsController.declineFriendRequest)
 
 export default router;

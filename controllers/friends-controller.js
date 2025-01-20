@@ -39,4 +39,22 @@ const acceptFriendRequest = async (req, res) => {
   }
 };
 
-export { getFriendRequests, acceptFriendRequest };
+const declineFriendRequest = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deleted = await knex("friendships")
+      .where({ id, status: "pending" })
+      .delete();
+
+    if (!deleted) {
+      return res.status(404).json({ message: "Friend request not found" });
+    }
+
+    res.status(200).json({ message: "Friend request declined" });
+  } catch (error) {
+    res.status(500).json({ message: "Error declining friend request" });
+  }
+};
+
+export { getFriendRequests, acceptFriendRequest, declineFriendRequest };
