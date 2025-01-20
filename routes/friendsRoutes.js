@@ -11,4 +11,7 @@ router.route("/request/:id")
 
     .delete(authorize, friendsController.declineFriendRequest)
 
+router.get("/leaderboard", authorize, friendsController.getFriendsLeaderboard)
+
+
 export default router;
