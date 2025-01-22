@@ -98,9 +98,9 @@ const getFriendsLeaderboard = async (req, res) => {
           CASE
             WHEN COUNT(DISTINCT habits.id) = 0 THEN 0
             ELSE 
-              (SUM(habits.streak_count) / COUNT(DISTINCT habits.id)) * 0.5 + 
+              (SUM(DISTINCT habits.streak_count) / COUNT(DISTINCT habits.id)) * 0.5 + 
               COUNT(DISTINCT habits.id) * 0.3 + 
-              (SUM(habits.streak_count) / (COUNT(DISTINCT habits.id) * ?)) * 0.2
+              (SUM(DISTINCT habits.streak_count) / (COUNT(DISTINCT habits.id) * ?)) * 0.2
           END as score
         `,
           [maxStreak] // Pass the value here again

@@ -101,10 +101,9 @@ const postHabit = async (req, res) => {
 
 const deleteHabit = async (req, res) => {
   const { id } = req.params;
-  const userId = req.user.id;
 
   try {
-    const rowsDeleted = await knex("habits").where({ id, user_id: userId }).delete();
+    const rowsDeleted = await knex("habits").where({ id }).delete();
 
     if (rowsDeleted === 0) {
       return res.status(404).json({ message: `Habit not found` });
